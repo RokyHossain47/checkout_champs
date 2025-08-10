@@ -45,7 +45,7 @@ This project is developed as part of our **E-Commerce & Web Engineering** group 
 Open terminal and run:
 
 # clone the repo
-git clone https://github.com/your-username/checkout-champs.git
+git clone https://github.com/rokyh459/checkout-champs.git
 cd checkout-champs
 
 # install PHP deps
