@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Group-B</title>
+      <title>Checkout Champs</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -52,7 +52,7 @@
                   <li><a href="#">Gift Ideas</a></li>
                   <li><a href="#">New Releases</a></li>
                   <li><a href="#">Today's Deals</a></li>
-                  <li><a href="#">Customer Service</a></li>
+                  <li><a href="{{route('login')}}">Login</a></li>
                </ul>
             </div>
             <div class="location_main">Help Line  Number : <a href="#">+1 1800 1200 1200</a></div>
