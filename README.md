@@ -44,14 +44,14 @@ This project is developed as part of our **E-Commerce & Web Engineering** group 
 
 Open terminal and run:
 
-# clone the repo
+## clone the repo
 git clone https://github.com/rokyh459/checkout_champs.git
 cd checkout-champs
 
-# install PHP deps
+## Install PHP deps
 composer install
 
-# connect with database
+## Connect with database
 open -> .env.example .env change database name
 
 ## Generate Application Key
@@ -61,7 +61,7 @@ php artisan key:generate
 ## Seed the database
 php artisan migrate:fresh --seed
 
-# serve the project
+## serve the project
 php artisan serve
 
 You will get Ip to run this project. open it with your browser

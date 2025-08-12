@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,14 +25,28 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
-    // products
-    Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products');
 
-    // orders
-    Route::get('/admin/order', [OrderController::class, 'index'])->name('admin.orders');
+    // products CRUD
+    Route::resource('/admin/products', ProductController::class, [
+        'as' => 'admin'
+    ]);
 
-    // users
-    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
+    // categories CRUD
+    Route::resource('/admin/categories', CategoryController::class, [
+        'as' => 'admin'
+    ]);
+
+
+    // orders CRUD
+    Route::resource('/admin/orders', OrderController::class, [
+        'as' => 'admin'
+    ]);
+
+    // users CRUD
+    Route::resource('/admin/users', UserController::class, [
+        'as' => 'admin'
+    ]);
+
 });
 
 require __DIR__.'/auth.php';

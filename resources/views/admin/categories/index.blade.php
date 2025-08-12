@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="d-flex justify-between items-center">
+        <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Products') }}
+                {{ __('Categories') }}
             </h2>
-            <a href="{{ route('admin.products.create') }}" class="btn btn-dark">Add Product</a>
+            <a href="{{ route('admin.categories.create') }}" class="btn btn-dark">Add Category</a>
         </div>
     </x-slot>
 
@@ -12,40 +12,40 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h4 class="mb-4">Product Lists</h4>
+                    <h4 class="mb-4">Category Lists</h4>
                     <table id="products-table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Image</th>
-                                <th>Price</th>
-                                <th>Stock</th>
+                                <th>Slug</th>
+                                <th>Parent</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($products as $product)
+                            @foreach ($categories as $category)
                                 <tr>
-                                    <td>{{ $product->id }}</td>
-                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $category->id }}</td>
+                                    <td>{{ $category->name }}</td>
                                     <td>
-                                        @if ($product->image)
-                                            <img src="{{ $product->image }}" alt="{{ $product->name }}" width="60"
+                                        @if ($category->image)
+                                            <img src="{{ $category->image }}" alt="{{ $category->name }}" width="60"
                                                 height="60" style="object-fit:cover;">
                                         @else
-                                            <img src="https://via.placeholder.com/60x60?text=No+Image" alt="No Image"
+                                            <img src="https://placeholder.co/60x60?text=No+Image" alt="No Image"
                                                 width="60" height="60">
                                         @endif
                                     </td>
-                                    <td>{{ $product->price }}</td>
-                                    <td>{{ $product->stock }}</td>
+                                    <td>{{ $category->slug }}</td>
+                                    <td>{{ $category->parent_id }}</td>
+                                    <td>{{ $category->is_active ? 'Active' : 'Inactive' }}</td>
                                     <td>
-                                        <a href="{{ route('admin.products.show', $product->id) }}"
+                                        <a href="{{ route('admin.categories.show', $category->id) }}"
                                             class="btn btn-info btn-sm">View</a>
-                                        <a href="{{ route('admin.products.edit', $product->id) }}"
+                                        <a href="{{ route('admin.categories.edit', $category->id) }}"
                                             class="btn btn-warning btn-sm">Edit</a>
-                                        <form action="{{ route('admin.products.destroy', $product->id) }}"
+                                        <form action="{{ route('admin.categories.destroy', $category->id) }}"
                                             method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
@@ -54,10 +54,10 @@
                                         </form>
                                     </td>
                                 </tr>
+                                
                             @endforeach
-                        </tbody>
+                            </tbody>
                     </table>
-
                 </div>
             </div>
         </div>

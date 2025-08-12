@@ -7,7 +7,62 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index() {
-        return view('admin.users.index');
+    public function index()
+    {
+        $users = \App\Models\User::all();
+        return view('admin.users.index', compact('users'));
+    }
+
+    public function create()
+    {
+        return view('admin.users.create');
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+        ]);
+        $data['password'] = bcrypt($data['password']);
+        \App\Models\User::create($data);
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
+    }
+
+    public function show($id)
+    {
+        $user = \App\Models\User::findOrFail($id);
+        return view('admin.users.show', compact('user'));
+    }
+
+    public function edit($id)
+    {
+        $user = \App\Models\User::findOrFail($id);
+        return view('admin.users.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = \App\Models\User::findOrFail($id);
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'nullable|min:6',
+        ]);
+        if ($data['password']) {
+            $data['password'] = bcrypt($data['password']);
+        } else {
+            unset($data['password']);
+        }
+        $user->update($data);
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $user = \App\Models\User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');
     }
 }

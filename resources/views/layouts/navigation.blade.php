@@ -15,15 +15,21 @@
                     <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.products')" :active="request()->routeIs('admin.products')">
+                    <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index')">
+                        {{ __('Categories') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
                         {{ __('Products') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.orders')" :active="request()->routeIs('admin.orders')">
+                    <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.index')">
                         {{ __('Orders') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')">
+                    <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
                         {{ __('Users') }}
                     </x-nav-link>
+                    {{-- <x-nav-link :href="route('admin.imports.index')" :active="request()->routeIs('admin.imports.index')">
+                        {{ __('Imports') }}
+                    </x-nav-link> --}}
                 </div>
             </div>
 
