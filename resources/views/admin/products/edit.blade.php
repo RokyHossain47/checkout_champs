@@ -54,7 +54,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Product</button>
+                        <button type="submit" class="btn btn-dark">Update Product</button>
                     </form>
                 </div>
             </div>

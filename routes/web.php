@@ -13,7 +13,11 @@ Route::get('/', function () {
 });
 
 Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
+    $productsCount = \App\Models\Product::count();
+    $ordersCount = \App\Models\Order::count();
+    $usersCount = \App\Models\User::count();
+    $recentProducts = \App\Models\Product::orderBy('created_at', 'desc')->take(10)->get();
+    return view('admin.dashboard', compact('productsCount', 'ordersCount', 'usersCount', 'recentProducts'));
 })->middleware(['auth', 'verified'])->name('admin.dashboard');
 
 Route::get('/user/dashboard', function () {

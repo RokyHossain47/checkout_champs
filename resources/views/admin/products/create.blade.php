@@ -49,7 +49,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add Product</button>
+                        <button type="submit" class="btn btn-dark">Add Product</button>
                     </form>
                 </div>
             </div>

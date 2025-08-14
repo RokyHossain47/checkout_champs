@@ -30,10 +30,9 @@
                                     <td>{{ $category->name }}</td>
                                     <td>
                                         @if ($category->image)
-                                            <img src="{{ $category->image }}" alt="{{ $category->name }}" width="60"
-                                                height="60" style="object-fit:cover;">
+                                            <img src="{{ asset('storage/'.$category->image) }}" alt="{{ $category->name }}" width="60" height="60" style="object-fit:cover;">
                                         @else
-                                            <img src="https://placeholder.co/60x60?text=No+Image" alt="No Image"
+                                            <img src="https://placehold.co/100x100" alt="No Image"
                                                 width="60" height="60">
                                         @endif
                                     </td>

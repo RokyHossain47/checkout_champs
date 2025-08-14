@@ -11,7 +11,7 @@
                     <form action="{{ route('admin.orders.store') }}" method="POST">
                         @csrf
                         <!-- Add order fields here -->
-                        <button type="submit" class="btn btn-primary">Add Order</button>
+                        <button type="submit" class="btn btn-dark">Add Order</button>
                     </form>
                 </div>
             </div>

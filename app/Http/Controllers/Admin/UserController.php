@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -24,8 +25,13 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $data['password'] = bcrypt($data['password']);
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('users', 'public');
+        }
+        $data['password'] = Hash::make($data['password']);
+        $data['role'] = 2;
         \App\Models\User::create($data);
         return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
     }
@@ -49,7 +55,11 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|min:6',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('users', 'public');
+        }
         if ($data['password']) {
             $data['password'] = bcrypt($data['password']);
         } else {

@@ -4,7 +4,10 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Products') }}
             </h2>
-            <a href="{{ route('admin.products.create') }}" class="btn btn-dark">Add Product</a>
+            <div class="d-flex gap-3">
+                <a href="{{ route('admin.products.create') }}" class="btn btn-dark">Add Product</a>
+                <a href="" class="btn btn-dark">Import</a>
+            </div>
         </div>
     </x-slot>
 
@@ -31,14 +34,14 @@
                                     <td>{{ $product->name }}</td>
                                     <td>
                                         @if ($product->image)
-                                            <img src="{{ $product->image }}" alt="{{ $product->name }}" width="60"
+                                            <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}" width="60"
                                                 height="60" style="object-fit:cover;">
                                         @else
-                                            <img src="https://via.placeholder.com/60x60?text=No+Image" alt="No Image"
+                                            <img src="https://placehold.co/100x100" alt="No Image"
                                                 width="60" height="60">
                                         @endif
                                     </td>
-                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $product->price.'TK' }}</td>
                                     <td>{{ $product->stock }}</td>
                                     <td>
                                         <a href="{{ route('admin.products.show', $product->id) }}"

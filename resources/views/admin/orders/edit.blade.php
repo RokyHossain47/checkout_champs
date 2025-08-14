@@ -12,7 +12,7 @@
                         @csrf
                         @method('PUT')
                         <!-- Add order fields here -->
-                        <button type="submit" class="btn btn-primary">Update Order</button>
+                        <button type="submit" class="btn btn-dark">Update Order</button>
                     </form>
                 </div>
             </div>

@@ -1,27 +1,41 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Users') }}
-        </h2>
+        <div class="d-flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Users List') }}
+            </h2>
+            <a href="{{ route('admin.users.create') }}" class="btn btn-dark">Add Product</a>
+        </div>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <a href="{{ route('admin.users.create') }}" class="btn btn-primary mb-3">Add User</a>
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>#</th>
+                                <th>Image</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php $serial = 1; @endphp
                             @foreach($users as $user)
+                                @if(isset($user->role) && $user->role == 1)
+                                    @continue
+                                @endif
                             <tr>
-                                <td>{{ $user->id }}</td>
+                                <td>{{ $serial++ }}</td>
+                                <td>
+                                    @if($user->image)
+                                        <img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}" width="50">
+                                    @else
+                                        <span class="text-muted">No Image</span>
+                                    @endif
+                                </td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>

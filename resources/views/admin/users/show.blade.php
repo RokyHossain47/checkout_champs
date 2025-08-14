@@ -11,6 +11,14 @@
                     <ul class="list-group mb-3">
                         <li class="list-group-item"><strong>Name:</strong> {{ $user->name }}</li>
                         <li class="list-group-item"><strong>Email:</strong> {{ $user->email }}</li>
+                        <li class="list-group-item">
+                            <strong>Image:</strong>
+                            @if($user->image)
+                                <img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}" width="100">
+                            @else
+                                <span class="text-muted">No Image</span>
+                            @endif
+                        </li>
                     </ul>
                     <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display:inline;">
