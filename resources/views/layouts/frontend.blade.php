@@ -41,7 +41,7 @@
       <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
-            <div class="footer_logo"><a href="index.html"><img src="{{asset('frontend/images/footer-logo.png')}}"></a></div>
+            {{-- <div class="footer_logo"><a href="index.html"><img src="{{asset('frontend/images/footer-logo.png')}}"></a></div> --}}
 
             <div class="footer_menu">
                <ul>

@@ -24,8 +24,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="logo"><a href="{{ url('/') }}"><img
-                                    src="{{ asset('frontend/images/logo.png') }}"></a></div>
+                        <div class="logo P-4">
+                            {{-- <a href="{{ url('/') }}"><img --}}
+                                    {{-- src="{{ asset('frontend/images/logo.png') }}"></a> --}}
+                        </div>
                     </div>
                 </div>
             </div>
