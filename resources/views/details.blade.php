@@ -7,12 +7,10 @@
                 <div class="col-sm-12">
                     <div class="custom_menu">
                         <ul>
-                            <li><a href="#">Best Sellers</a></li>
-                            <li><a href="#">Gift Ideas</a></li>
-                            <li><a href="#">New Releases</a></li>
-                            <li><a href="#">Today's Deals</a></li>
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                        </ul>
+                                <li><a href="{{ url('/') }}">Home</a></li>
+                                <li><a href="#featured_products">Featured Products</a></li>
+                                <li><a href="{{ route('login') }}">Login</a></li>
+                            </ul>
                     </div>
                 </div>
             </div>
@@ -29,14 +27,14 @@
                     <h5 class="text-muted mb-3">{{ $product->slug }}</h5>
                     <p class="card-text mb-3">{{ $product->description }}</p>
                     <ul class="list-group list-group-flush mb-3">
-                        <li class="list-group-item"><strong>Price:</strong> <span class="text-success" style="font-size:1.3em;">${{ $product->price }}</span></li>
+                        <li class="list-group-item"><strong>Price:</strong> <span class="text-success" style="font-size:1.3em;">{{ $product->price }}TK</span></li>
                         <li class="list-group-item"><strong>Stock:</strong> {{ $product->stock }}</li>
                         <li class="list-group-item"><strong>SKU:</strong> {{ $product->sku }}</li>
                         <li class="list-group-item"><strong>Category:</strong> {{ $product->category->name ?? 'N/A' }}</li>
                     </ul>
                     <div class="d-flex justify-content-between align-items-center mt-4">
-                        <a href="#" class="btn btn-primary btn-lg">Buy Now</a>
-                        <a href="{{ url('/') }}" class="btn btn-outline-secondary">Back to Home</a>
+                        <a href="{{ route('order.create', $product->id) }}" class="btn btn-dark">Order Now</a>
+                        <a href="{{ url('/') }}" class="btn btn-outline-dark">Back to Home</a>
                     </div>
                 </div>
             </div>

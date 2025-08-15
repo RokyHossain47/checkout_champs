@@ -17,6 +17,14 @@ Route::get('/', function () {
     $products = Product::latest()->get();
     return view('index', compact('categories', 'products'));
 });
+Route::get('/order/{id}', function () {
+    $product = Product::find(request('id'));
+    return view('order', compact('product'));
+});
+
+
+Route::get('/order/{product}', [OrderController::class, 'create'])->name('order.create');
+Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 Route::get('/website/details/{id}', function ($id) {
     $product = Product::findOrFail($id);

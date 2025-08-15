@@ -39,7 +39,11 @@
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                         <a href="index.html">Home</a>
                         <a href="#featured_products">Featured Products</a>
-                        <a href="{{ route('login') }}">Login</a>
+                        @if (auth()->user())
+                            <a href="{{ route('logout') }}">Logout</a>
+                        @else
+                            <a href="{{ route('login') }}">Login</a>
+                        @endif
                     </div>
                     <span class="toggle_icon" onclick="openNav()"><img
                             src="{{ asset('frontend/images/toggle-icon.png') }}"></span>
@@ -148,7 +152,7 @@
                                             <div class="box_main">
                                                 <h4 class="shirt_text">{{ $product->name }}</h4>
                                                 <p class="price_text">Price <span
-                                                        style="color: #262626;">${{ $product->price }}</span></p>
+                                                        style="color: #262626;">{{ $product->price }}TK</span></p>
                                                 <div class="tshirt_img">
                                                     <img src="{{ asset('storage/' . $product->image) }}"
                                                         alt="{{ $product->name }}" alt="{{ $product->name }}">
@@ -197,7 +201,7 @@
                                     <div class="box_main">
                                         <h4 class="shirt_text">{{ $product->name }}</h4>
                                         <p class="price_text">Price <span
-                                                style="color: #262626;">${{ $product->price }}</span></p>
+                                                style="color: #262626;">{{ $product->price }}TK</span></p>
                                         <div class="tshirt_img">
                                             <img src="{{ asset('storage/' . $product->image) }}"
                                                 alt="{{ $product->name }}" alt="{{ $product->name }}">
