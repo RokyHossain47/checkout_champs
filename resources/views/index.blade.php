@@ -9,7 +9,7 @@
                     <div class="col-sm-12">
                         <div class="custom_menu">
                             <ul>
-                                <li><a href="{{url('/')}}">Home</a></li>
+                                <li><a href="{{ url('/') }}">Home</a></li>
                                 <li><a href="#featured_products">Featured Products</a></li>
                                 <li><a href="{{ route('login') }}">Login</a></li>
                             </ul>
@@ -38,9 +38,8 @@
                     <div id="mySidenav" class="sidenav">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                         <a href="index.html">Home</a>
-                        <a href="fashion.html">Fashion</a>
-                        <a href="electronic.html">Electronic</a>
-                        <a href="jewellery.html">Jewellery</a>
+                        <a href="#featured_products">Featured Products</a>
+                        <a href="{{ route('login') }}">Login</a>
                     </div>
                     <span class="toggle_icon" onclick="openNav()"><img
                             src="{{ asset('frontend/images/toggle-icon.png') }}"></span>
@@ -49,9 +48,11 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            @foreach ($categories as $category)
+                                <a class="dropdown-item" href="#{{ strtolower($category->name) }}_main_slider">
+                                    {{ $category->name }}
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                     <div class="main">
@@ -86,10 +87,6 @@
                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                         <span class="padding_10">Cart</span></a>
                                 </li>
-                                <li><a href="#">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                        <span class="padding_10">Cart</span></a>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -98,15 +95,14 @@
         </div>
         <!-- header section end -->
         <!-- banner section start -->
-        <div class="banner_section layout_padding">
-            <div class="container">
-                <div id="my_slider" class="carousel slide" data-ride="carousel">
+        <div class="banner_section layout_padding pb-5">
+            <div class="container pb-5">
+                <div id="my_slider" class="carousel slide pb-5" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
-                                    <div class="buynow_bt"><a href="#">Buy Now</a></div>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +110,6 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
-                                    <div class="buynow_bt"><a href="#">Buy Now</a></div>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +117,6 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
-                                    <div class="buynow_bt"><a href="#">Buy Now</a></div>
                                 </div>
                             </div>
                         </div>
@@ -140,8 +134,8 @@
     </div>
     <!-- banner bg main end -->
     <!-- Dynamic Category Sections Start -->
-    @foreach ($categories as $category)
-        <div class="fashion_section">
+    @foreach ($categories as $key => $category)
+        <div class="fashion_section {{$key == 0 ? 'pt-5 mt-5' : ''}}">
             <div id="{{ strtolower($category->name) }}_main_slider" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -165,8 +159,7 @@
                                                             Now</a>
                                                     </div>
                                                     <div class="seemore_bt">
-                                                        <a
-                                                            href="{{ route('website.products.show', $product->id) }}">See
+                                                        <a href="{{ route('website.products.show', $product->id) }}">See
                                                             More</a>
                                                     </div>
                                                 </div>
@@ -193,37 +186,40 @@
     <!-- Dynamic Category Sections End -->
 
     <!-- Featured Products Section Start -->
-    <div class="featured_products_section layout_padding" id="featured_products">
-        <div class="container">
-            <h1 class="fashion_taital">Feature Products</h1>
-            <div class="fashion_section_2">
-                <div class="row justify-content-center">
-                    @foreach ($products as $product)
-                        <div class="col-lg-4 col-sm-4">
-                            <div class="box_main">
-                                <h4 class="shirt_text">{{ $product->name }}</h4>
-                                <p class="price_text">Price <span style="color: #262626;">${{ $product->price }}</span>
-                                </p>
-                                <div class="tshirt_img">
-                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
-                                        alt="{{ $product->name }}">
-                                </div>
-                                <div class="btn_main">
-                                    <div class="buy_bt"><a href="{{ route('website.products.show', $product->id) }}">Buy
-                                            Now</a>
+     <div class="fashion_section">
+            <div id="featured_products" class="carousel slide" data-ride="carousel">
+                <div class="container">
+                    <h1 class="fashion_taital">Feature Products</h1>
+                    <div class="fashion_section_2">
+                        <div class="row justify-content-center">
+                            @foreach ($products as $product)
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="box_main">
+                                        <h4 class="shirt_text">{{ $product->name }}</h4>
+                                        <p class="price_text">Price <span
+                                                style="color: #262626;">${{ $product->price }}</span></p>
+                                        <div class="tshirt_img">
+                                            <img src="{{ asset('storage/' . $product->image) }}"
+                                                alt="{{ $product->name }}" alt="{{ $product->name }}">
+                                        </div>
+                                        <div class="btn_main">
+                                            <div class="buy_bt"><a
+                                                    href="{{ route('website.products.show', $product->id) }}">Buy
+                                                    Now</a>
+                                            </div>
+                                            <div class="seemore_bt">
+                                                <a href="{{ route('website.products.show', $product->id) }}">See
+                                                    More</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="seemore_bt"><a
-                                            href="{{ route('website.products.show', $product->id) }}">See
-                                            More</a>
-                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     <br>
     <br>
     <!-- Featured Products Section End -->
