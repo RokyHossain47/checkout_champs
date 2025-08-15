@@ -6,11 +6,23 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('index');
+    $categories = Category::with(['products' => function($q) {
+        $q->latest()->take(9);
+    }])->get();
+    $products = Product::latest()->get();
+    return view('index', compact('categories', 'products'));
 });
+
+Route::get('/website/details/{id}', function ($id) {
+    $product = Product::findOrFail($id);
+    return view('details', compact('product'));
+})->name('website.products.show');
+
 
 Route::get('/admin/dashboard', function () {
     $productsCount = \App\Models\Product::count();

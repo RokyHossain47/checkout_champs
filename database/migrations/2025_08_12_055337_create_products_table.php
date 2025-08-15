@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
+            // $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
         });
     }
 
